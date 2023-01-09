@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  tf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        TERRAFORM_VERSION: 1.3.7
+    working_dir: "/home"
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    volumes:
+      - ~/.aws:/root/.aws:ro
+      - ./:/home
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.ssh:/root/.ssh
+    env_file:
+      - .aws.env
