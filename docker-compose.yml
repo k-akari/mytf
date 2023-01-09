@@ -15,9 +15,9 @@ services:
     tty: true
     volumes:
       - ~/.aws:/root/.aws:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.ssh:/root/.ssh:ro
       - ./:/home
-      - ~/.gitconfig:/root/.gitconfig
-      - ~/.ssh:/root/.ssh
     env_file:
       - .aws.env
     environment:
