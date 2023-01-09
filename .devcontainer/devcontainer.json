@@ -6,7 +6,8 @@
 	"service": "tf",
 	"workspaceFolder": "/home",
 	"settings": {
-		"terminal.integrated.defaultProfile.linux": "/bin/bash"
+		"terminal.integrated.defaultProfile.linux": "/bin/bash",
+		"editor.formatOnSave": true
 	},
 	"extensions": [
 		"hashicorp.terraform"
