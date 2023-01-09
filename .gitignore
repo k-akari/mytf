@@ -1,0 +1,24 @@
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp/
+tmp
+caches
+*.orig
+*.log
+*.swp
+.idea/
+
+### Terraform
+*.tfstate*
+*.tfstate.backup
+*.tfplan_lock
+.terraform
+terraform.tfstate.d
+__*_ln.tf
+/terraform/amplify/secrets/
+/terraform/amplify/envs/dev/apps/example/
+
+node_modules
+
+# Environment Variables
+*.env
