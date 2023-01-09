@@ -14,7 +14,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ~/.aws:/root/.aws:ro
+      - ~/.aws:/root/.aws
       - ~/.gitconfig:/root/.gitconfig:ro
       - ~/.ssh:/root/.ssh:ro
       - ./:/home
