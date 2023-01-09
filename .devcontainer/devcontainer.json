@@ -1,0 +1,14 @@
+{
+	"name": "Terraform",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "tf",
+	"workspaceFolder": "/home",
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "/bin/bash"
+	},
+	"extensions": [
+		"hashicorp.terraform"
+	]
+}
