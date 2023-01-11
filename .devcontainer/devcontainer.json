@@ -5,6 +5,7 @@
 	],
 	"service": "tf",
 	"workspaceFolder": "/home",
+	"initializeCommand": "aws-vault exec admin_role -- env | grep AWS > .aws.env",
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "/bin/bash",
 		"editor.formatOnSave": true
