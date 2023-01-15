@@ -28,16 +28,6 @@ resource "aws_ecs_task_definition" "main" {
       linuxParameters = {
         initProcessEnabled = true
       }
-      healthCheck = {
-        retries = 3
-        command = [
-          "CMD-SHELL",
-          "ps aux | grep runner"
-        ]
-        timeout     = 5
-        interval    = 30
-        startPeriod = 15
-      }
     },
   ])
 
@@ -51,42 +41,31 @@ resource "aws_ecs_task_definition" "main" {
     operating_system_family = "LINUX"
     cpu_architecture        = "X86_64"
   }
-  skip_destroy = true
-  tags         = var.tags
+  tags          = var.tags
+  task_role_arn = aws_iam_role.ecs_task.arn
 }
 
 resource "aws_ecs_service" "main" {
   count = length(var.task_definitions)
 
   # required arguments
-  name = "${var.prefix}-ecs-service"
+  name = "${var.prefix}-ecs-service-${var.task_definitions[count.index].family}"
 
   # optional arguments
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE_SPOT"
-    weight            = 1
-  }
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE"
-    weight            = 0
-  }
-  cluster                            = aws_ecs_cluster.main.arn
-  deployment_maximum_percent         = 10
-  deployment_minimum_healthy_percent = 0
-  desired_count                      = 0
-  enable_ecs_managed_tags            = true
-  enable_execute_command             = true
-  force_new_deployment               = true
-  launch_type                        = "FARGATE"
-  lifecycle {
-    create_before_destroy = true
-    ignore_changes        = [desired_count]
-  }
+  cluster                 = aws_ecs_cluster.main.arn
+  desired_count           = 0
+  enable_ecs_managed_tags = true
+  enable_execute_command  = true
+  launch_type             = "FARGATE"
   network_configuration {
-    subnets          = var.subnet_ids
+    # required arguments
+    subnets = var.subnet_ids
+
+    # optional arguments
     assign_public_ip = true
   }
   platform_version = "LATEST"
   propagate_tags   = "TASK_DEFINITION"
   task_definition  = aws_ecs_task_definition.main[count.index].arn
+  tags             = var.tags
 }

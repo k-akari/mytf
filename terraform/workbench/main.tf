@@ -36,8 +36,8 @@ module "ecs" {
   task_definitions = [
     {
       family = "periodic-job"
-      cpu    = 512
-      memory = 512
+      cpu    = 1024
+      memory = 2048
       command = [
         "bundle",
         "exec",
@@ -48,8 +48,8 @@ module "ecs" {
     },
     {
       family = "workbench"
-      cpu    = 512
-      memory = 512
+      cpu    = 1024
+      memory = 2048
       command = [
         "bin/sh"
       ]
@@ -63,15 +63,17 @@ module "periodic_task" {
   prefix = local.prefix
   tags   = local.tags
 
-  vpc_id              = module.network.vpc_id
-  subnet_ids          = module.network.public_subnet_ids
-  ecs_cluster_arn     = module.ecs.ecs_cluster_arn
-  task_definition_arn = module.ecs.task_definition_arns[0]
+  vpc_id                  = module.network.vpc_id
+  subnet_ids              = module.network.public_subnet_ids
+  ecs_cluster_arn         = module.ecs.ecs_cluster_arn
+  task_definition_arn     = module.ecs.task_definition_arns[0]
+  ecs_task_execution_role_arn = module.ecs.ecs_task_execution_role_arn
+  ecs_task_role_arn           = module.ecs.ecs_task_role_arn
 
   event_rules = [
     {
       name = "sleep-job"
-      cron = "cron(*/5 * * * * *)"
+      cron = "cron(*/5 * * * ? *)"
     }
   ]
 }

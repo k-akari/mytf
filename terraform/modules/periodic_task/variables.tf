@@ -35,3 +35,13 @@ variable "event_rules" {
   }))
   default = null
 }
+
+variable "ecs_task_execution_role_arn" {
+  type    = string
+  default = null
+}
+
+variable "ecs_task_role_arn" {
+  type    = string
+  default = null
+}
