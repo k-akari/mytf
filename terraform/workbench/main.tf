@@ -56,3 +56,22 @@ module "ecs" {
     }
   ]
 }
+
+module "periodic_task" {
+  source = "../modules/periodic_task"
+
+  prefix = local.prefix
+  tags   = local.tags
+
+  vpc_id              = module.network.vpc_id
+  subnet_ids          = module.network.public_subnet_ids
+  ecs_cluster_arn     = module.ecs.ecs_cluster_arn
+  task_definition_arn = module.ecs.task_definition_arns[0]
+
+  event_rules = [
+    {
+      name = "sleep-job"
+      cron = "cron(*/5 * * * * *)"
+    }
+  ]
+}

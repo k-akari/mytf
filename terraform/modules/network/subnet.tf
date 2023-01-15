@@ -1,6 +1,6 @@
 locals {
-  subnet_cidr_blocks         = [for cidr_block in cidrsubnets(var.vpc_cidr_block, 4) : cidrsubnets(cidr_block, 2, 2, 2)]
-  public_subnet_cidr_blocks  = local.subnet_cidr_blocks[0]
+  subnet_cidr_blocks        = [for cidr_block in cidrsubnets(var.vpc_cidr_block, 4) : cidrsubnets(cidr_block, 2, 2, 2)]
+  public_subnet_cidr_blocks = local.subnet_cidr_blocks[0]
 }
 
 resource "aws_subnet" "public" {
