@@ -5,10 +5,31 @@
 	],
 	"service": "tf",
 	"workspaceFolder": "/home",
-	"initializeCommand": "aws-vault exec admin_role -- env | grep AWS > .aws.env",
+	"initializeCommand": "aws-vault exec admin_role -- env | grep AWS > .env",
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "/bin/bash",
-		"editor.formatOnSave": true
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"files.encoding": "utf8",
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimFinalNewlines": true,
+		"files.trimTrailingWhitespace": true,
+		"editor.formatOnSave": true,
+		"[terraform]": {
+			"editor.defaultFormatter": "hashicorp.terraform",
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.formatAll.terraform": true
+			}
+		},
+		"[terraform-vars]": {
+			"editor.defaultFormatter": "hashicorp.terraform",
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.formatAll.terraform": true
+			}
+		}
 	},
 	"extensions": [
 		"hashicorp.terraform"

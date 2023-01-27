@@ -63,10 +63,10 @@ module "periodic_task" {
   prefix = local.prefix
   tags   = local.tags
 
-  vpc_id                  = module.network.vpc_id
-  subnet_ids              = module.network.public_subnet_ids
-  ecs_cluster_arn         = module.ecs.ecs_cluster_arn
-  task_definition_arn     = module.ecs.task_definition_arns[0]
+  vpc_id                      = module.network.vpc_id
+  subnet_ids                  = module.network.public_subnet_ids
+  ecs_cluster_arn             = module.ecs.ecs_cluster_arn
+  task_definition_arn         = module.ecs.task_definition_arns[0]
   ecs_task_execution_role_arn = module.ecs.ecs_task_execution_role_arn
   ecs_task_role_arn           = module.ecs.ecs_task_role_arn
 
